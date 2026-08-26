@@ -1,0 +1,48 @@
+# =========================================================================
+# render.yaml — Konfigirasyon deplwaman otomatik pou Render.com
+# =========================================================================
+# Ak fichye sa a, ou ka deplwaye tout pwojè a sou Render an "Blueprint" —
+# yon sèl sèvis ki bati frontend la EPI sèvi l ansanm ak API a.
+#
+# Etap yo (gade DEPLOYMENT.md pou detay ak kapti):
+#   1. Mete kòd la sou GitHub.
+#   2. Sou Render, klike "New +" -> "Blueprint" -> chwazi repo ou.
+#   3. Render li fichye sa a otomatikman e kreye sèvis la.
+#   4. Ranpli DATABASE_URL (soti Neon) ak lòt kle yo nan paj "Environment".
+# =========================================================================
+services:
+  - type: web
+    name: mache-ayisyen
+    runtime: node
+    plan: free
+    # Bati frontend la, epi enstale depandans backend yo.
+    # --include=dev asire vite/tailwind enstale (Render mete NODE_ENV=production).
+    buildCommand: cd frontend && npm install --include=dev && npm run build && cd ../backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      # Jenere yon kle sekrè otomatikman pou JWT (otantifikasyon).
+      - key: JWT_SECRET
+        generateValue: true
+      # OBLIGATWA: koneksyon Postgres ou (soti Neon). Ou ranpli l manyèlman.
+      - key: DATABASE_URL
+        sync: false
+      # OBLIGATWA apre premye deplwaman: URL piblik sèvis sa a
+      # (egz. https://mache-ayisyen.onrender.com). Pou Stripe ak MonCash retou.
+      - key: FRONTEND_URL
+        sync: false
+      # ---- MonCash (opsyonèl — kite vid pou kounye a) ----
+      - key: MONCASH_MODE
+        value: sandbox
+      - key: MONCASH_CLIENT_ID
+        sync: false
+      - key: MONCASH_CLIENT_SECRET
+        sync: false
+      # ---- Stripe (opsyonèl — pou peman kat) ----
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_CURRENCY
+        value: usd
+      - key: GOURDES_PER_USD
+        value: "132"
