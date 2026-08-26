@@ -42,6 +42,11 @@ const User = {
     return rows.map(toPublic);
   },
 
+  async updatePassword(id, newPassword) {
+    const hash = bcrypt.hashSync(newPassword, 10);
+    await db.run(`UPDATE users SET password = ? WHERE id = ?`, [hash, id]);
+  },
+
   toPublic,
 };
 

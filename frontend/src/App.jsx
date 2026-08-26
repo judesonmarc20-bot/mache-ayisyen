@@ -18,6 +18,7 @@ import Cart from './pages/Cart';
 import Orders from './pages/Orders';
 import PaymentReturn from './pages/PaymentReturn';
 import Wishlist from './pages/Wishlist';
+import Account from './pages/Account';
 import Messages from './pages/Messages';
 import VendorDashboard from './pages/vendor/VendorDashboard';
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -75,6 +76,14 @@ export default function App() {
                       element={
                         <ProtectedRoute>
                           <Orders />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="/account"
+                      element={
+                        <ProtectedRoute>
+                          <Account />
                         </ProtectedRoute>
                       }
                     />

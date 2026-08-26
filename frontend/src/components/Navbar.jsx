@@ -88,12 +88,16 @@ export default function Navbar() {
               )}
 
               <div className="ml-2 pl-3 border-l border-slate-200 flex items-center gap-3">
-                <div className="hidden lg:flex items-center gap-2">
+                <NavLink
+                  to="/account"
+                  className="hidden lg:flex items-center gap-2 hover:opacity-80 transition-opacity"
+                  title="Kont mwen"
+                >
                   <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 font-display font-semibold text-sm flex items-center justify-center">
                     {user.name.charAt(0).toUpperCase()}
                   </span>
                   <span className="text-slate-600">{user.name.split(' ')[0]}</span>
-                </div>
+                </NavLink>
                 <button
                   onClick={handleLogout}
                   className="text-slate-400 hover:text-red-600 transition-colors"
@@ -169,6 +173,9 @@ export default function Navbar() {
                   Admin
                 </NavLink>
               )}
+              <NavLink to="/account" className={mobileLinkClass} onClick={() => setOpen(false)}>
+                ⚙️ Kont mwen
+              </NavLink>
               <div className="flex items-center justify-between px-3 pt-2 mt-1 border-t border-slate-100">
                 <span className="text-sm text-slate-500">
                   Konekte kòm <span className="font-medium text-slate-700">{user.name}</span>
