@@ -124,7 +124,8 @@ async function seed() {
     name: 'Vaz Seramik Penti Alamen',
     description: 'Yon vaz dekoratif ki penti alamen pa atizan lokal.',
     price: 1500,
-    imageUrl: 'https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=600',
+    // Pa mete foto moun kòm imaj pwodwi a. Yo ka ajoute yon foto vaz reyèl pita.
+    imageUrl: null,
     stock: 5,
     storeId: store2.id,
     categoryId: catMaison.id,
